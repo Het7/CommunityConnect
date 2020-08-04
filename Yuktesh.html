@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" >
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>
+         Map of the Missing
+      </title>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+      <script type="text/javascript">
+         var gmarkers = [];
+         $(function(){
+           //$(".default-text").addDefaultText();
+           
+           function performSearch(context) {
+             var inputWithDefaultText = $('.default-text', context);
+             if (inputWithDefaultText.length > 0 && inputWithDefaultText.val() === inputWithDefaultText.attr('rel'))
+               return;
+            
+             var searchVal = encodeURIComponent($('input[type=text]', context).val());
+           
+             var url = "/search.aspx?q=" + searchVal;
+             window.location = url;
+           }
+           //Search controls
+           $(".search-box img").click(function() {
+             performSearch($(this).parent());
+           });
+           
+           $('.search-box input[type=text]').keypress(function (event) {
+             if(event.keyCode == 13){
+               performSearch($(this).parent());
+               return false;
+             }
+           
+             return true;
+           });
+         });
+      </script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Community Connect</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+             <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+             <a class="nav-link" href="form.html">Report Missing Person<span class="sr-only">(current)</span></a>
+            </li>
+          <li class="nav-item active">
+             <a class="nav-link" href="contact.html">Contact Us<span class="sr-only">(current)</span></a>
+          </li>
+           </ul>
+        </div>
+       </nav>
+
+       <form method="post" action="/campus-map.aspx" id="ctl01">
+        <div id="page-container">
+           <div id="heightDiv">
+              <div id="gateway-content">
+                 <div id="map" style="width:100%; height:760px;"></div>
+                 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDob9A-EDi3QrZ91QZGrGNzOh-wCECFMjQ"></script>
+                 <script>
+                    var locay = new google.maps.LatLng(29.95, -90.07);
+                    var locations = [
+                      {"id" :"1","category" :"6","campus_location" :"F2","title" :"John Doe","description" :"<p>John Doe is a 35 year old African-American male. He is reported to be 6'1 tall and has a slim build. He was last seen in a blue t-shirt and shorts. He was last seen walking back from Bob's Grocer. Anyone with information about his whereabouts can call on 123-456-7890..</p>","image":"https://cdn.shopify.com/s/files/1/0513/2409/files/black_men_skin_care_routine.jpg?16189251569666482956","longitude":"-89.5","latitude":"29.95"},
+                      {"id" :"2","category" :"6","campus_location" :"B2","title" :"Jane Smith","description" :"<p>Jane Smith is a 23 year old caucasian women. She is 5'4 tall, weighs about 140 pounds and has blonde hair. She was last seen leaving from her office at 8th and 9th wearing a white shirt. Any information can be shared at relief@help.com.</p>","image":"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F24%2F2018%2F05%2Fchampagne.jpgU","longitude":"-90.5","latitude":"30.5"},
+                      {"id" :"3","category" :"6","campus_location" :"B2","title" :"Bobby Drew","description" :"<p>Mr.Drew is a 76 year old African-American man. He is 5'9 tall and weighs about 165 pounds. He is a dementia patient that lives at Anchorridge Retirement home. During the evacuation he left without notice. Any information can be sent right to the Louisiana State Police.</p>","image":"https://st.depositphotos.com/1372276/2141/i/450/depositphotos_21418779-stock-photo-portrait-of-elderly-black-man.jpg","longitude":"-91.2","latitude":"29.69"},
+                      {"id" :"4","category" :"6","campus_location" :"B2","title" :"Frank Chang","description" :"<p>Frank Chang is a 16 year old Asian male. He is 5'8 tall and weighs about 130 pounds. He was last seen wearing his Home Depot work uniform at 7:00 pm.</p>","image":"https://www.8asians.com/wp-content/uploads/2014/11/8A-2014-11-Spiritless.png","longitude":"-90.085","latitude":"29.948"},
+                      {"id" :"5","category" :"6","campus_location" :"C2","title" :"Mary Sanchez","description" :"<p>Mary Sanchez is a 40 year old Hispanic woman. She is 5'6 tall and weighs about 130 pounds. She was last seen wearing a purple shirt and black pants. Any information can be directed to the Louisiana State Police Department.</p>","image":"https://women.nasa.gov/wp-content/uploads/2012/02/Elia-Ordonez-1024x681.jpg","longitude":"-90.9","latitude":"29.28"},
+                      {"id" :"6","category" :"6","campus_location" :"D3","title" :"Bernice Riley","description" :"<p>Bernice Riley is a 33 year old African-American woman. She is 5'7 tall and weighs about 140 pounds. She was last seen wearing a white t-shirt and black pants. Any information can be directed to the Louisiana State Police Department.</p>","image":"https://blackeoejournal.com/wp-content/uploads/2019/12/confident-black-woman.jpg","longitude":"-88.4","latitude":"30.53"},
+                      {"id" :"7","category" :"6","campus_location" :"G3","title" :"Vito Corleone","description" :"<p>Mr.Corleone is a 63 year old caucasian male. He is 5'10 tall and weighs 150 pounds. He was last seen working in his garden prior to being swept away. Any information can be directed to the Corleone family at 999-888-777</p>","image":"https://vignette.wikia.nocookie.net/godfather/images/4/40/Don_Vito_Corleone.jpg/revision/latest?cb=20130324224405","longitude":"-89.78","latitude":"29.43"}
+                    ];
+
+                    var styles = [
+                       {
+                         stylers: [
+                           { hue: "black" },
+                           { saturation: -90 }
+                         ]
+                       },{
+                         featureType: "road",
+                         elementType: "geometry",
+                         stylers: [
+                           { lightness: 100 },
+                           { visibility: "simplified" }
+                         ]
+                       },{
+                         featureType: "road",
+                         elementType: "labels",
+                         stylers: [
+                           { visibility: "on" }
+                         ]
+                       }
+                     ];
+
+                    var styledMap = new google.maps.StyledMapType(styles, {name: "City"});
+                    var mapOptions = {
+                    center: locay,
+                       zoom: 9,
+                    mapTypeControl: true,
+                       zoomControl: true,
+                       zoomControlOptions: {
+                      style: google.maps.ZoomControlStyle.SMALL
+                       },
+                       scrollwheel: false,
+                    streetViewControl:true,
+
+                    };
+
+                    var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+
+                    var infowindow = new google.maps.InfoWindow({
+                      maxWidth:300,
+                      infoBoxClearance: new google.maps.Size(1,1),
+                      disableAutoPan:false
+                    });
+
+
+                    var academics = "media/1051486/marker_red.png";
+                    var arts = "/media/1052026/marker_blue.png";
+                    var athletics = "media/1052021/marker_green.png";
+                    var park = "/media/1051977/parking.png";
+                    var admin = "/media/1052031/marker_grey.png";
+                    var studentLife = "/media/1052036/marker_purple.png";
+
+                    var marker, i, icon, image;
+
+                         for (i = 0; i < locations.length; i++) {
+                        switch(locations[i].category){
+                          case "1":
+                            icon = academics;
+                          break;
+                          case "2":
+                            icon = arts;
+                          break;
+                          case "3":
+                            icon = athletics;
+                          break;
+                          case "4":
+                            icon = park;
+                          break;
+                          case "5":
+                            icon = admin;
+                          break;
+                          case "6":
+                            icon = studentLife;
+                          break;
+                        }
+                        function hasImage(location){
+                          if (location.image !== ""){
+                            return '<img src="'+location.image+'" style="max-width:100%;" />';
+                          } else {
+                            return '';
+                          }
+                        }
+                               var marker = new google.maps.Marker({
+                                   position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+                          title: locations[i].title,
+                          // icon: icon,
+                          map:map
+                               });
+                        gmarkers.push(marker);
+                               google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                   return function () {
+                            if ( locations[i].description !== "" || locations[i].title !== ""){
+                                         infowindow.setContent('<div class="content" id="content-'+locations[i].id +
+                              '" style="max-height:300px; font-size:12px;"><h3>' + locations[i].title + '</h3>' +
+                              '<hr class="grey" />' +
+                              hasImage(locations[i]) +
+                              locations[i].description) + '</div>';
+                                         infowindow.open(map, marker);
+                            }
+                                   }
+                               })(marker, i));
+                      }
+                    function toggleMarkers(){
+                    for (i = 0; i<gmarkers.length; i++){
+                      if (gmarkers[i].getMap() != null) gmarkers[i].setMap(null);
+                                   else gmarkers[i].setMap(map);
+                    }
+                    }
+                 </script>
+              </div>
+              </td>
+              </tr>
+              </table>
+           </div>
+        </div>
+     </form>
+  </body>
+</html>
